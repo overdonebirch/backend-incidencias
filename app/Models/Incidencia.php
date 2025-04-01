@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Incidencia extends Model
 {
+    protected $fillable = ['urgencia', 'descripcion','nombre'];
     const URGENCIAS = [
         'URGENTE' => 'Urgente',
         'MUY_URGENTE' => 'Muy Urgente',
