@@ -62,7 +62,7 @@ class IncidenciaController extends Controller
         
         $incidencia->update($validated);
         
-        return response()->json($incidencia, 200);
+        return json_encode(["message" => "Incidencia actualizada"]);
     }
 
     /**
