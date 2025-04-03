@@ -20,7 +20,9 @@ Route::get('/', function () {
 
 Route::controller(IncidenciaController::class)->group(function () {
     Route::get('/incidencias','index');
+    Route::get('/incidencias/jsonschema','getIncidenciaSchema');
     Route::get('/incidencias/{incidencia}','show');
+
     Route::post('/incidencias','store');
     Route::patch('/incidencias/{incidencia}','update');
     Route::delete('/incidencias/{incidencia}','destroy');

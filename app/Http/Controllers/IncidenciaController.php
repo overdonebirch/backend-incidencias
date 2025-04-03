@@ -72,4 +72,35 @@ class IncidenciaController extends Controller
     {
         $incidencia->delete();
     }
+
+    public function getIncidenciaSchema()
+    {
+        $schema = [
+            'title' => 'Incidencia',
+            'description' => 'Schema de una Incidencia',
+            'type' => 'object',
+            'properties' => [
+                'id' => [
+                    'description' => 'El id de la incidencia',
+                    'type' => 'string'
+                ],
+                'nombre' => [
+                    'description' => 'El nombre de la incidencia',
+                    'type' => 'string'
+                ],
+                'descripcion' => [
+                    'description' => 'La descripcion de la incidencia',
+                    'type' => 'string'
+                ],
+                'urgencia' => [
+                    'description' => 'La urgencia de la incidencia',
+                    'type' => 'string'
+                ]
+            ],
+            'required' => ['id', 'nombre', 'descripcion', 'urgencia'],
+            "additionalProperties" => false
+        ];
+
+        return response()->json($schema);
+    }
 }
