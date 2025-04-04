@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('incidencias', function (Blueprint $table) {
             $table->id();
-            $table->string("nombre");
+            $table->string("titulo");
             $table->text("descripcion");
             $table->enum('urgencia', array_values(Incidencia::URGENCIAS));
             $table->timestamps();

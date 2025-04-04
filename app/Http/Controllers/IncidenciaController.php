@@ -29,7 +29,10 @@ class IncidenciaController extends Controller
     public function store(Request $request)
     {
         $incidencia = Incidencia::create($request->all());
-        return json_encode(["message" => "Incidencia creada con id $incidencia->id"]);
+        return response()->json([
+            "message" => "Incidencia creada",
+            "incidencia" => $incidencia
+        ], 201);
     }
 
     /**
@@ -55,7 +58,7 @@ class IncidenciaController extends Controller
     public function update(Request $request, Incidencia $incidencia)
     {
         $validated = $request->validate([
-            'nombre' => 'sometimes',
+            'titulo' => 'sometimes',
             'descripcion' => 'sometimes',
             'urgencia' => 'sometimes|in:Urgente,Muy Urgente,Media,Baja',
         ]);
@@ -82,19 +85,23 @@ class IncidenciaController extends Controller
             'properties' => [
                 'id' => [
                     'description' => 'El id de la incidencia',
-                    'type' => 'string'
+                    'type' => 'string',
+                    'minLength' => 1
                 ],
                 'nombre' => [
                     'description' => 'El nombre de la incidencia',
-                    'type' => 'string'
+                    'type' => 'string',
+                    'minLength' => 1
                 ],
                 'descripcion' => [
                     'description' => 'La descripcion de la incidencia',
-                    'type' => 'string'
+                    'type' => 'string',
+                    'minLength' => 1
                 ],
                 'urgencia' => [
                     'description' => 'La urgencia de la incidencia',
-                    'type' => 'string'
+                    'type' => 'string',
+                    'enum' => array_values(Incidencia::URGENCIAS)
                 ]
             ],
             'required' => ['id', 'nombre', 'descripcion', 'urgencia'],

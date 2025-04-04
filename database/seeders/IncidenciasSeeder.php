@@ -18,17 +18,17 @@ class IncidenciasSeeder extends Seeder
     {
 
         DB::table('incidencias')->insert([
-            [   'nombre' => 'incidencia1',
-                'urgencia' => 'Urgente',
+            [   'titulo' => 'incidencia1',
+                'urgencia' => 'Alta',
                 'descripcion' => 'Servidor principal caído. Requiere atención inmediata.',
             ],
             [
-                'nombre' => 'incidencia2',
+                'titulo' => 'incidencia2',
                 'urgencia' => 'Media',
                 'descripcion' => 'Problemas con el inicio de sesión de algunos usuarios en el portal de clientes.',
             ],
             [
-                'nombre' => 'incidencia3',
+                'titulo' => 'incidencia3',
                 'urgencia' => 'Baja',
                 'descripcion' => 'Mejora solicitada para el diseño del reporte mensual de incidencias.',
             ],
