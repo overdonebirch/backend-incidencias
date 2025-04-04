@@ -88,8 +88,8 @@ class IncidenciaController extends Controller
                     'type' => 'string',
                     'minLength' => 1
                 ],
-                'nombre' => [
-                    'description' => 'El nombre de la incidencia',
+                'titulo' => [
+                    'description' => 'El titulo de la incidencia',
                     'type' => 'string',
                     'minLength' => 1
                 ],
@@ -104,7 +104,7 @@ class IncidenciaController extends Controller
                     'enum' => array_values(Incidencia::URGENCIAS)
                 ]
             ],
-            'required' => ['id', 'nombre', 'descripcion', 'urgencia'],
+            'required' => ['id', 'titulo', 'descripcion', 'urgencia'],
             "additionalProperties" => false
         ];
 
