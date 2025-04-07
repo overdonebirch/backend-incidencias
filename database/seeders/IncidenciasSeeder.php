@@ -17,21 +17,14 @@ class IncidenciasSeeder extends Seeder
     public function run()
     {
 
-        DB::table('incidencias')->insert([
-            [   'titulo' => 'incidencia1',
-                'urgencia' => 'Alta',
-                'descripcion' => 'Servidor principal caído. Requiere atención inmediata.',
-            ],
-            [
-                'titulo' => 'incidencia2',
-                'urgencia' => 'Media',
-                'descripcion' => 'Problemas con el inicio de sesión de algunos usuarios en el portal de clientes.',
-            ],
-            [
-                'titulo' => 'incidencia3',
-                'urgencia' => 'Baja',
-                'descripcion' => 'Mejora solicitada para el diseño del reporte mensual de incidencias.',
-            ],
-        ]);
+        $urgencias = ['Alta', 'Muy Alta', 'Media', 'Baja'];
+
+        for ($i = 0; $i < 20; $i++) {
+            Incidencia::create([
+                'titulo' => fake()->sentence(4),
+                'descripcion' => fake()->paragraph(3),
+                'urgencia' => fake()->randomElement($urgencias),
+            ]);
+        }
     }
 }
