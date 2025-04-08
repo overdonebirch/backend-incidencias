@@ -14,21 +14,38 @@ class IncidenciaController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-    {   
+    {
 
         $query = Incidencia::query();
         $page = 5;
         $filter = new IncidenciaFilter($request);
         $query = $filter->apply($query);
-        return $query;
 
         if ($request->has("perPage")) {
             $page = $request->input("perPage");
         }
 
 
-    
+
         return $query->paginate($page);
+    }
+
+    public function urgencias(Request $request)
+    {
+        $urgencias = Incidencia::query()->distinct()->pluck("urgencia");
+        $prioridades = [
+            'Muy Alta',
+            'Alta',
+            'Media',
+            'Baja'
+        ];
+
+        // Ordenar las urgencias según el orden de las prioridades
+        $urgenciasOrdenadas = $urgencias->sortBy(function ($urgencia) use ($prioridades) {
+            return array_search($urgencia, $prioridades);
+        })->values()->toArray();
+
+        return $urgenciasOrdenadas;
     }
 
     /**
@@ -39,14 +56,14 @@ class IncidenciaController extends Controller
 
     }
 
-    
+
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        try{
+        try {
             $incidencia = Incidencia::create($request->all());
 
             // $subject = "Incidencia creada";
@@ -65,8 +82,7 @@ class IncidenciaController extends Controller
                 "message" => "Incidencia creada",
                 "incidencia" => $incidencia
             ], 201);
-        }
-        catch(\Exception $e){
+        } catch (\Exception $e) {
             return response()->json([
                 "message" => $e->getMessage(),
             ], 403);
@@ -87,7 +103,7 @@ class IncidenciaController extends Controller
      */
     public function edit(string $id)
     {
-        
+
     }
 
     /**
@@ -100,9 +116,9 @@ class IncidenciaController extends Controller
             'descripcion' => 'sometimes',
             'urgencia' => 'sometimes|in:Baja,Media,Alta,Muy Alta',
         ]);
-        
+
         $incidencia->update($validated);
-        
+
         return json_encode(["message" => "Incidencia actualizada"]);
     }
 
@@ -128,8 +144,9 @@ class IncidenciaController extends Controller
 
     }
 
-    public function enviarMail($subject,$cuerpoMensaje,$colorTitulo){
-        $mail = new TestEmail($subject,$cuerpoMensaje,$colorTitulo);
+    public function enviarMail($subject, $cuerpoMensaje, $colorTitulo)
+    {
+        $mail = new TestEmail($subject, $cuerpoMensaje, $colorTitulo);
         Mail::to('destinatario@example.com')->send($mail);
     }
 

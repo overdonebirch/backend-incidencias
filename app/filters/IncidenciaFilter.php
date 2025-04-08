@@ -44,25 +44,15 @@ class IncidenciaFilter
             "Media" => ["Media", "Muy Alta", "Alta", "Baja"],
             "Baja" => ["Baja", "Muy Alta", "Alta", "Media"],
         ];
-
+    
         if (!isset($mapeoUrgencias[$value])) {
-            return $query; 
+            return $query;
         }
-
-        $ordenUrgencias = $mapeoUrgencias[$value];
-
-
-        $prioridades = [
-            $ordenUrgencias[0] => 4,
-            $ordenUrgencias[1] => 3,
-            $ordenUrgencias[2] => 2,
-            $ordenUrgencias[3] => 1,
-        ];
-
-        return $query->get()->sortByDesc(function ($incidencia) use ($prioridades) {
-            return $prioridades[$incidencia->urgencia] ?? 0;
-        })->values(); 
-
+    
+        $orden = $mapeoUrgencias[$value];
+        $ordenSql = implode("','", $orden);
+    
+        return $query->orderByRaw("FIELD(urgencia, '{$ordenSql}') ASC");
     }
 
 }
