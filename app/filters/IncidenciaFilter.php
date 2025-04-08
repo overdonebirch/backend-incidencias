@@ -55,4 +55,8 @@ class IncidenciaFilter
         return $query->orderByRaw("FIELD(urgencia, '{$ordenSql}') ASC");
     }
 
+    public function fecha(Builder $query, $value){
+        return $query->orderBy('created_at', $value);
+    }
+
 }
