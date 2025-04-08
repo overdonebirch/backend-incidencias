@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\IncidenciaFilter;
 use Illuminate\Http\Request;
 use App\Models\Incidencia;
 use App\Mail\TestEmail;
@@ -12,9 +13,22 @@ class IncidenciaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        return Incidencia::all();
+    public function index(Request $request)
+    {   
+
+        $query = Incidencia::query();
+        $page = 5;
+        $filter = new IncidenciaFilter($request);
+        $query = $filter->apply($query);
+        return $query;
+
+        if ($request->has("perPage")) {
+            $page = $request->input("perPage");
+        }
+
+
+    
+        return $query->paginate($page);
     }
 
     /**
@@ -22,7 +36,7 @@ class IncidenciaController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     
