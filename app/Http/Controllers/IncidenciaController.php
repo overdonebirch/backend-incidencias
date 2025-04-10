@@ -66,18 +66,6 @@ class IncidenciaController extends Controller
         try {
             $incidencia = Incidencia::create($request->all());
 
-            // $subject = "Incidencia creada";
-            // $cuerpoMensaje = (object)[
-            //     'titulo' => 'Nueva Incidencia',
-            //     'detalles' => [
-            //         'id' => "ID $incidencia->id",
-            //         'descripcion' => "Descripcion : $incidencia->descripcion",
-            //         'urgencia' => "Urgencia : $incidencia->urgencia",
-            //     ]
-            // ];
-            // $colorTitulo = "titulo-estandar";
-            // $this->enviarMail($subject,$cuerpoMensaje,$colorTitulo);
-
             return response()->json([
                 "message" => "Incidencia creada",
                 "incidencia" => $incidencia
@@ -127,21 +115,8 @@ class IncidenciaController extends Controller
      */
     public function destroy(Incidencia $incidencia)
     {
-
-        // $id = $incidencia->id;
-        // $titulo = $incidencia->titulo;
         $incidencia->delete();
-        // $subject = "Incidencia Eliminada";
-        // $cuerpoMensaje = (object)[
-        //     'titulo' => 'Se Ha Eliminado Una incidencia',
-        //     'detalles' => [
-        //         'id' => "ID : $id",
-        //         'descripcion' => "Titulo : $titulo"
-        //     ]
-        // ];
-        // $colorTitulo = "titulo-eliminado";
-        // $this->enviarMail($subject,$cuerpoMensaje,$colorTitulo);
-
+   
     }
 
     public function enviarMail($subject, $cuerpoMensaje, $colorTitulo)
