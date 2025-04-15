@@ -5,6 +5,7 @@ return [
         'view',
         'create',
         'edit',
-        'delete'
+        'delete',
+        '*'
     ]
 ];
