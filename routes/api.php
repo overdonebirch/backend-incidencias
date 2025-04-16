@@ -21,6 +21,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::controller(AuthController::class)->group(function () {
     Route::post('/login','login');
     Route::post('/tokens','getTokens');
-    Route::post('/logout','logout');
+
+});
+Route::middleware('auth:sanctum')->group(function () 
+{
+    Route::post('/logout', [App\Http\Controllers\Api\AuthController::class, 'logout']);
 
 });

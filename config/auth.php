@@ -41,7 +41,7 @@ return [
             'provider' => 'users',
         ],
         'api' => [
-            'driver' => 'token', // o 'sanctum' si usás Laravel Sanctum
+            'driver' => 'sanctum', // o 'sanctum' si usás Laravel Sanctum
             'provider' => 'users',
             'hash' => false,
         ],

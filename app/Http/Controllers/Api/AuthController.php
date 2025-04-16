@@ -29,21 +29,18 @@ class AuthController extends Controller
         }
 
         return response()->json([
-            'token' => $user->createToken(request()->device_name)->plainTextToken
+            'token' => $user->createToken(request()->device_name)->plainTextToken,
+            'user' => $user
         ], 200);
 
     }
     public function logout(Request $request): JsonResponse
     {
-        $user = User::where('email', request()->email)->first();
+        $request->user()->tokens()->delete();
 
-
-        if (!$user) {
-            return response()->json(['error' => 'Usuario no encontrado'], 404);
-        }
-        $user()->tokens()->delete();
-        return response()->json(['usuario' => $user, 'token_existente' => $user->tokens]);
-
+        return response()->json([
+            'message' => 'Logged out'
+        ]);
     }
     public function getUser(Request $request)
     {
@@ -64,6 +61,6 @@ class AuthController extends Controller
         if (!$user) {
             return response()->json(['error' => 'Usuario no encontrado'], 404);
         }
-        return response()->json(['usuario' => $user, 'token_existente' => $user->tokens]);
+        return response()->json(['user' => $user, 'token_existente' => $user->tokens]);
     }
 }
