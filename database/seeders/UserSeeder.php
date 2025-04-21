@@ -16,10 +16,11 @@ class UserSeeder extends Seeder
     {
         // Crear usuario con permiso de sólo vista
         $user = User::create([
-            "name" => "user",
-            "email" => "user@gmail.com",
+            "name" => "Alejandro",
+            "email" => "alejandro@gmail.com",
             "password" => Hash::make("123") // Hasheando la contraseña
         ]);
+        $user->givePermissionTo('incidencias.create');
         $user->givePermissionTo('incidencias.view');
         
         // Crear admin con todos los permisos de incidencias

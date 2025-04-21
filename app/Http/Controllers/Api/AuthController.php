@@ -30,7 +30,7 @@ class AuthController extends Controller
 
         return response()->json([
             'token' => $user->createToken(request()->device_name)->plainTextToken,
-            'user' => $user
+            'user' => ['id' => $user->id,'name' => $user->name, 'email' => $user->email,'permissions' => $user->getAllPermissions()->pluck('name')]
         ], 200);
 
     }
