@@ -16,5 +16,11 @@ class Incidencia extends Model
         'BAJA' => 'Baja'
     ];
 
+    const ESTADOS = [
+        'ABIERTA' => 'Abierta',
+        'EN PROCESO' => 'En Proceso',
+        'RESUELTA' => 'Resuelta',
+        'CERRADA' => 'Cerrada' 
+    ];
     use HasFactory;
 }

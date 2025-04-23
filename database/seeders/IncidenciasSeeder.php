@@ -17,114 +17,59 @@ class IncidenciasSeeder extends Seeder
     public function run()
     {
 
-        $incidencias = [
-            [
-                'titulo' => 'Fuga de agua en el pasillo principal',
-                'descripcion' => 'Se detectó una fuga constante de agua cerca de la entrada del edificio. Puede representar riesgo de resbalones.',
-                'urgencia' => 'Alta',
-            ],
-            [
-                'titulo' => 'Corte de energía en el segundo piso',
-                'descripcion' => 'Desde la mañana no hay suministro eléctrico en varias oficinas del segundo nivel.',
-                'urgencia' => 'Muy Alta',
-            ],
-            [
-                'titulo' => 'Problema con el acceso a internet',
-                'descripcion' => 'Los usuarios reportan intermitencia en la conexión Wi-Fi en el área administrativa.',
-                'urgencia' => 'Media',
-            ],
-            [
-                'titulo' => 'Papelera desbordada en baño de visitas',
-                'descripcion' => 'La papelera del baño de visitas no ha sido vaciada desde ayer.',
-                'urgencia' => 'Baja',
-            ],
-            [
-                'titulo' => 'Puerta de emergencia trabada',
-                'descripcion' => 'La puerta de emergencia del tercer piso no abre correctamente. Representa un riesgo en caso de evacuación.',
-                'urgencia' => 'Muy Alta',
-            ],
-            [
-                'titulo' => 'Aire acondicionado no funciona',
-                'descripcion' => 'La unidad de aire en la sala de reuniones dejó de funcionar, causando incomodidad a los asistentes.',
-                'urgencia' => 'Media',
-            ],
-            [
-                'titulo' => 'Ruidos extraños en el sistema eléctrico',
-                'descripcion' => 'Se escuchan zumbidos constantes en el cuarto de servidores. Posible sobrecarga.',
-                'urgencia' => 'Alta',
-            ],
-            [
-                'titulo' => 'Escalera con peldaño flojo',
-                'descripcion' => 'Uno de los peldaños de la escalera central está flojo y podría causar un accidente.',
-                'urgencia' => 'Alta',
-            ],
-            [
-                'titulo' => 'Solicitar recarga de extintores',
-                'descripcion' => 'Varios extintores se encuentran con carga vencida, según etiquetas de revisión.',
-                'urgencia' => 'Media',
-            ],
-            [
-                'titulo' => 'Foco fundido en pasillo de entrada',
-                'descripcion' => 'El foco principal del pasillo de entrada no funciona, dejando el área oscura.',
-                'urgencia' => 'Baja',
-            ],
-            [
-                'titulo' => 'Elevador detenido entre pisos',
-                'descripcion' => 'El elevador se quedó trabado entre el piso 1 y 2 con una persona dentro. Ya se llamó al técnico.',
-                'urgencia' => 'Muy Alta',
-            ],
-            [
-                'titulo' => 'Grieta en pared de la sala de espera',
-                'descripcion' => 'Se detectó una grieta vertical en una de las paredes principales, cerca del techo.',
-                'urgencia' => 'Media',
-            ],
-            [
-                'titulo' => 'Computadora con fallas al arrancar',
-                'descripcion' => 'Una de las computadoras de recepción no inicia correctamente. Pantalla negra al prender.',
-                'urgencia' => 'Media',
-            ],
-            [
-                'titulo' => 'Cables expuestos en zona de carga',
-                'descripcion' => 'Hay cables eléctricos sin protección en la zona donde se recibe mercancía.',
-                'urgencia' => 'Alta',
-            ],
-            [
-                'titulo' => 'Olor a gas en cocina del comedor',
-                'descripcion' => 'Se percibe un fuerte olor a gas cerca de la estufa. Se cerró el suministro preventivamente.',
-                'urgencia' => 'Muy Alta',
-            ],
-            [
-                'titulo' => 'Basura acumulada en patio trasero',
-                'descripcion' => 'Hay acumulación de bolsas de basura sin recoger desde hace dos días.',
-                'urgencia' => 'Baja',
-            ],
-            [
-                'titulo' => 'Fallo en sistema de alarma contra incendios',
-                'descripcion' => 'La alarma se activó sin razón y no se pudo desactivar por varios minutos.',
-                'urgencia' => 'Muy Alta',
-            ],
-            [
-                'titulo' => 'Problemas con la cerradura del archivo',
-                'descripcion' => 'La puerta del archivo principal no cierra completamente, dejando documentos expuestos.',
-                'urgencia' => 'Media',
-            ],
-            [
-                'titulo' => 'Daño en la pantalla informativa del lobby',
-                'descripcion' => 'La pantalla principal que muestra anuncios está rota y parpadea constantemente.',
-                'urgencia' => 'Media',
-            ],
-            [
-                'titulo' => 'Falta de jabón en baños de empleados',
-                'descripcion' => 'Los dispensadores de jabón en los baños de empleados están vacíos desde esta mañana.',
-                'urgencia' => 'Baja',
-            ],
+        $urgencias = ['Alta', 'Muy Alta', 'Media', 'Baja'];
+        $estados = ['Abierta', 'En Proceso', 'Resuelta', 'Cerrada'];
+
+        $titulos = [
+            'Fallo en la impresora',
+            'Problema con el correo',
+            'Corte de red',
+            'Pantalla azul en Windows',
+            'No funciona el ratón',
+            'Actualización de software',
+            'Error al iniciar sesión',
+            'Lentitud en el sistema',
+            'Solicitud de acceso',
+            'Problema con VPN',
+            'Fallo en la base de datos',
+            'No se guarda el archivo',
+            'Error al imprimir',
+            'Sistema caído',
+            'Problemas con Zoom',
+            'Configuración de correo',
+            'Sin acceso a Internet',
+            'Actualización pendiente',
+            'Fallos de seguridad',
+            'Usuario bloqueado',
+            'Problema con Office',
+            'Teclado no responde',
+            'Error en SAP',
+            'Soporte para instalación',
+            'Restablecer contraseña',
         ];
 
-        foreach ($incidencias as &$incidencia) {
-            $incidencia['created_at'] = Carbon::now();
-            $incidencia['updated_at'] = Carbon::now();
-        }
+        $descripciones = [
+            'El usuario reporta que el equipo no responde al intentar imprimir.',
+            'El sistema operativo no carga correctamente y se reinicia solo.',
+            'Se requiere actualización de antivirus en varios equipos.',
+            'Solicitan configuración del cliente de correo para nuevos usuarios.',
+            'Error persistente en la conexión a la base de datos del sistema.',
+            'Red muy lenta, no se puede trabajar adecuadamente.',
+            'Fallo intermitente de conexión a Internet en la oficina principal.',
+            'Problema con los permisos de una carpeta compartida.',
+            'El sistema SAP lanza error de autenticación.',
+            'Se detectó posible intento de acceso no autorizado.',
+        ];
 
-        DB::table('incidencias')->insert($incidencias);
+        for ($i = 0; $i < 25; $i++) {
+            DB::table('incidencias')->insert([
+                'titulo' => $titulos[array_rand($titulos)],
+                'descripcion' => $descripciones[array_rand($descripciones)],
+                'urgencia' => $urgencias[array_rand($urgencias)],
+                'estado' => $estados[array_rand($estados)],
+                'created_at' => Carbon::now()->subDays(rand(0, 60)),
+                'updated_at' => Carbon::now(),
+            ]);
+        }
     }
 }

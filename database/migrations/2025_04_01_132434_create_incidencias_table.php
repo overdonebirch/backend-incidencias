@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string("titulo");
             $table->text("descripcion");
             $table->enum('urgencia', array_values(Incidencia::URGENCIAS));
+            $table->enum('estado', array_values(Incidencia::ESTADOS));
             $table->timestamps();
         });
     }
